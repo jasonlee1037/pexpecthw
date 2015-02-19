@@ -1,0 +1,21 @@
+#homework 1
+newprimates = open ("primates2.nex", "w")
+oldprimates = open ("primates.nex").read()
+corrected = oldprimates.replace("mcmc","mcmp")
+newprimates.write(corrected)
+newprimates = open ("primates2.nex").read()
+newprimates.find("mcmp")
+Out: 11344
+newprimates = close ("primates2.nex")
+
+
+#homework 1 continued
+child = pexpect.spawn("mb -i primates2.nex") #-i tells mrbayes to run in interactive mode
+#send the string "mcmc" to the process. This tells mrbayes to start running. The \r is carriage return
+child.sendline(r"mcmcp") 
+# tells mrbayes to stop the analysis (do not continue)
+child.sendline("no") 
+child.expect("MrBayes >") # wait for the mrbayes prompt.
+print child.before # child.before shows all of the screen output
+##now add a line to tell mrbayes to quit ("quit")
+child.sendline("quit")

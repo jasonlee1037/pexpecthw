@@ -1,0 +1,15 @@
+#homework 2
+#spawn an interactive mrbayes process
+child = pexpect.spawn("mb -i primates2.nex")
+#send the command "execute primates2.nex" to mrbayes
+child.sendline(r"execute primates2.nex")
+#send the sumt command to mrbayes
+child.sendline("sumt")
+#check to see that the mrbayes command prompt is returned
+child.expect("MrBayes >")
+#print everything before the mrbayes prompt
+print child.before
+#send the sump command
+child.sendline("sump")
+#quit mrbayes
+child.sendline("quit")

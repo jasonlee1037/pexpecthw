@@ -1,0 +1,13 @@
+#homework 3
+#send the command "set nowarn = yes" to mrbayes
+child = pexpect.spawn("mb -i primates2.nex")
+child.sendline("set nowarn = yes")
+#send the command "mcmcp ngen = 1000" where XX is the string of numgen
+child.sendline("mcmcp ngen = XX")
+#send the command "mcmc" to mrbayes
+child.sendline(r"mcmc")
+#send the command "no" to mrbayes (do not continue analysis)
+child.sendline("no") 
+#send the command "quit" to mrbayes
+child.sendline("quit") 
+
