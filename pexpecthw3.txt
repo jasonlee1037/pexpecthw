@@ -1,13 +1,33 @@
 #homework 3
-#send the command "set nowarn = yes" to mrbayes
-child = pexpect.spawn("mb -i primates2.nex")
-child.sendline("set nowarn = yes")
-#send the command "mcmcp ngen = 1000" where XX is the string of numgen
-child.sendline("mcmcp ngen = XX")
-#send the command "mcmc" to mrbayes
-child.sendline(r"mcmc")
-#send the command "no" to mrbayes (do not continue analysis)
-child.sendline("no") 
-#send the command "quit" to mrbayes
-child.sendline("quit") 
+import pexpect
+def child1fn (filename):
+  #send the command "set nowarn = yes" to mrbayes
+  child1 = pexpect.spawn("mb -i " + filename + ".nex")
+  child1.sendline("set nowarn = yes")
+  #send the command "mcmcp ngen = 1000" where XX is the string of numgen
+  child1.sendline("mcmcp ngen = XX")
+  #send the command "mcmc" to mrbayes
+  child1.sendline(r"mcmc")
+  #send the command "no" to mrbayes (do not continue analysis)
+  child1.sendline("no") 
+  #send the command "quit" to mrbayes
+  child1.sendline("quit") 
 
+def child2fn (filename):
+  child2 = pexpect.spawn("mb -i " + filename + ".nex")
+  child2.sendline(r"sump")
+  child2.sendline(r"sumt")
+  child1.sendline("quit")
+  
+import glob
+XX = pexpect.run("ls | wc -l")
+for name in glob.glob("*.t"):
+  yy+=1
+print "there are " + XX + "total files in the current directory and " + yy + "files that end in '.t'"
+nexus_files = glob.glob("*.nex")
+for nex in nexus_files:
+  child1fn(nex)
+  child2fn(nex)
+print "these files end in '.t': "
+for name in glob.glob("*.t"):
+  print ", " + name
